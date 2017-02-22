@@ -14,6 +14,11 @@
             $this->id = $id;
         }
 
+        function setRestaurantName($new_name)
+        {
+            $this->restaurant_name = $new_name;
+        }
+
         function getRestaurantName()
         {
             return $this->restaurant_name;
@@ -84,6 +89,12 @@
                 }
             }
             return $found_restaurants;
+        }
+
+        function update($new_name)
+        {
+            $GLOBALS['DB']->exec("UPDATE restaurant SET restaurant_name = '{$new_name}' WHERE id = {$this->getId()};");
+            $this->setRestaurantName($new_name);
         }
 
 

@@ -106,6 +106,22 @@
             $result = Restaurant::searchByCuisine($cuisine_id1);
             $this->assertEquals(array($test_restaurant1), $result);
         }
+
+        function test_update()
+        {
+            $restaurant_name = "Junkytown";
+            $cuisine_id = 1;
+            $price =3;
+            $new_restaurant = new Restaurant($restaurant_name, $cuisine_id, $price);
+            $new_restaurant->save();
+            $replacement_name = "Big Whopper";
+
+            $new_restaurant->update($replacement_name);
+            $result = $new_restaurant->getRestaurantName();
+
+            $this->assertEquals($replacement_name, $result);
+
+        }
     }
 
 ?>
