@@ -34,6 +34,27 @@
             return $this->id;
         }
 
+        function save()
+        {
+            $GLOBALS['DB']->exec("INSERT INTO restaurant (restaurant_name, cuisine_id, price) VALUES ('{$this->getRestaurantName()}', {$this->getCuisineId()}, {$this->getPrice()})");
+            $this->id = $GLOBALS['DB']->lastInsertId();
+        }
+
+        static function GetAll()
+        {
+            $returned_restaurants = $GLOBALS['DB']->query("SELECT * FROM restaurant;");
+            $restaurants = array();
+            foreach ($returned_restaurants as $restaurant){
+                $restaurant_name = $restaurant['restaurant_name'];
+                $cuisine_id = $restaurant['cuisine_id'];
+                $price = $restaurant['price'];
+                $id = $restaurant['id'];
+                $new_restaurant = new Restaurant($restaurant_name, $cuisine_id, $price, $id);
+                array_push($restaurants, $new_restaurant);
+            }
+            return $restaurants;
+        }
+
 
 
     }

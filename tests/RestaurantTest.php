@@ -33,6 +33,24 @@
             $this->assertEquals($resultarray, [$restaurant_name, $cuisine_id, $price]);
 
         }
+
+        function test_getAllandSave()
+        {
+            $restaurant_name1 = "Pies R Us";
+            $cuisine_id1 = 1;
+            $price1 = 2;
+            $restaurant1 = new Restaurant($restaurant_name1, $cuisine_id1, $price1);
+            $restaurant1->save();
+            $restaurant_name2 = "Cake for All";
+            $cuisine_id2 = 3;
+            $price2 = 4;
+            $restaurant2 = new Restaurant($restaurant_name2, $cuisine_id2, $price2);
+            $restaurant2->save();
+
+            $result = Restaurant::getAll();
+
+            $this->assertEquals([$restaurant1, $restaurant2], $result);
+        }
     }
 
 ?>
