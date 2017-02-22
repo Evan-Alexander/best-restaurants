@@ -15,24 +15,31 @@
 
     class RestaurantTest extends PHPUnit_Framework_TestCase
     {
-        // function test_constructorAndGetters()
-        // {
-        //     $restaurant_name = "Santeria";
-        //     $id = null;
-        //     $cuisine_id = 1;
-        //     $price = 2;
-        //
-        //     $new_restaurant = new Restaurant($restaurant_name, $cuisine_id, $price, $id);
-        //
-        //     $result_restaurant_name = $new_restaurant->getRestaurantName();
-        //     $result_cuisine_id = $new_restaurant->getCuisineId();
-        //     $result_price = $new_restaurant->getPrice();
-        //     $resultarray = array();
-        //     array_push($resultarray, $result_restaurant_name, $result_cuisine_id, $result_price);
-        //
-        //     $this->assertEquals($resultarray, [$restaurant_name, $cuisine_id, $price]);
-        //
-        // }
+        protected function tearDown()
+        {
+            Cuisine::deleteAll();
+            Restaurant::deleteAll();
+        }
+
+
+        function test_constructorAndGetters()
+        {
+            $restaurant_name = "Santeria";
+            $id = null;
+            $cuisine_id = 1;
+            $price = 2;
+
+            $new_restaurant = new Restaurant($restaurant_name, $cuisine_id, $price, $id);
+
+            $result_restaurant_name = $new_restaurant->getRestaurantName();
+            $result_cuisine_id = $new_restaurant->getCuisineId();
+            $result_price = $new_restaurant->getPrice();
+            $resultarray = array();
+            array_push($resultarray, $result_restaurant_name, $result_cuisine_id, $result_price);
+
+            $this->assertEquals($resultarray, [$restaurant_name, $cuisine_id, $price]);
+
+        }
 
         function test_getAllandSave()
         {
@@ -50,6 +57,21 @@
             $result = Restaurant::getAll();
 
             $this->assertEquals([$restaurant1, $restaurant2], $result);
+        }
+
+        function test_DeleteAll()
+        {
+            $restaurant_name = "Some Food Place";
+            $cuisine_id = 2;
+            $price = 4;
+            $test_restaurant = new Restaurant($restaurant_name, $cuisine_id, $price);
+
+            $test_restaurant->save();
+            Restaurant::deleteAll();
+
+            $result = Restaurant::getAll();
+
+            $this->assertEquals([], $result);
         }
     }
 
