@@ -73,6 +73,21 @@
 
             $this->assertEquals([], $result);
         }
+
+        function test_find()
+        {
+            $restaurant = "Pizza n things";
+            $cuisine_id = 2;
+            $price = 2;
+            $test_restaurant = new Restaurant($restaurant, $cuisine_id, $price);
+
+            $test_restaurant->save();
+
+            $result = Restaurant::find($test_restaurant->getId());
+
+            $this->assertEquals($test_restaurant, $result);
+
+        }
     }
 
 ?>
