@@ -122,6 +122,22 @@
             $this->assertEquals($replacement_name, $result);
 
         }
+
+        function test_updateCuisineId()
+        {
+            $restaurant_name = "Junkytown";
+            $cuisine_id = 1;
+            $price =3;
+            $new_restaurant = new Restaurant($restaurant_name, $cuisine_id, $price);
+            $new_restaurant->save();
+            $replacement_id = 3;
+
+            $new_restaurant->updateCuisineType($replacement_id);
+            $result = $new_restaurant->getCuisineId();
+
+            $this->assertEquals($replacement_id, $result);
+
+        }
     }
 
 ?>
