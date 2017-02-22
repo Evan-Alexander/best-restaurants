@@ -89,6 +89,34 @@
 
             $this->assertEquals($replacement_name, $result);
         }
+
+        function test_deletebyID()
+        {
+            $cuisine_name = "Haute";
+            $test_Cuisine= new Cuisine($cuisine_name);
+            $test_Cuisine->save();
+
+            $restaurant_name = "Spits In Your Food";
+            $cuisine_id = $test_Cuisine->getId();
+            $price = 4;
+            $new_restaurant = new Restaurant($restaurant_name, $cuisine_id, $price);
+            $new_restaurant->save();
+
+            $restaurant_name2 = "Snotty Waiter";
+            $cuisine_id2 = 4036;
+            $price2 = 5;
+            $new_restaurant2 = new Restaurant($restaurant_name2, $cuisine_id2, $price2);
+            $new_restaurant2->save();
+
+            $test_Cuisine->delete();
+            $result = Restaurant::getAll();
+
+            $this->assertEquals(array($new_restaurant2), $result);
+
+
+
+
+        }
     }
 
 
