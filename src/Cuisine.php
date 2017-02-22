@@ -15,6 +15,11 @@
             return $this->cuisine_type;
         }
 
+        function setCuisineType($new_name)
+        {
+            $this->cuisine_type = $new_name;
+        }
+
         function getId()
         {
             return $this->id;
@@ -55,6 +60,12 @@
                 }
             }
             return $found_cuisine;
+        }
+
+        function update($new_name)
+        {
+            $GLOBALS['DB']->exec("UPDATE cuisine SET cuisinetype = '{$new_name}' WHERE id = {$this->getId()};");
+            $this->setCuisineType($new_name);
         }
     }
 ?>

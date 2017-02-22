@@ -88,6 +88,24 @@
             $this->assertEquals($test_restaurant, $result);
 
         }
+
+        function test_searchbycuisine()
+        {
+            $restaurant1 = 'Grubway';
+            $cuisine_id1 = 1;
+            $price1 = 2;
+            $test_restaurant1 = new Restaurant($restaurant1, $cuisine_id1, $price1);
+            $test_restaurant1->save();
+
+            $restaurant2 = 'Soups for All';
+            $cuisine_id2 = 2;
+            $price2 = 4;
+            $test_restaurant2 = new Restaurant($restaurant2, $cuisine_id2, $price2);
+            $test_restaurant2->save();
+
+            $result = Restaurant::searchByCuisine($cuisine_id1);
+            $this->assertEquals(array($test_restaurant1), $result);
+        }
     }
 
 ?>
