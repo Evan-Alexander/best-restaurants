@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>List of Restaurants</title>
+    </head>
+    <body>
+        <h1>{{cuisines.getCuisineType}}</h1>
+
+        {% if restaurants is not empty %}
+            <p>Behold a list of restaurants serving this cuisine!</p>
+            <ul>
+                {% for restaurant in restaurants %}
+                <li>{{ restaurant.getRestaurantName }}</li>
+                <ul>
+                    <li>{{ restaurant.getPrice }}</li>
+                </ul>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        <h3>Add another Restaurant with this type of Cuisine!</h3>
+
+        <form action="/restaurant" method="post">
+            <input id="cuisine_id" type="hidden" name="cuisine_id" value="{{ cuisines.getId() }}">
+            <label for="restaurant_name">Restaurant Name</label>
+            <input type="text" id="restaurant_name "name="restaurant_name">
+
+            <label for="price">Price</label>
+            <select class="form-control" name="price">
+                <option value=null> - </option>
+                <option value="1">SuperCheap</option>
+                <option value="2">KindaCheap</option>
+                <option value="3">NotsoCheap</option>
+                <option value="4">BetterSave</option>
+                <option value="5">ExpenseAccount</option>
+            </select>
+
+            <button class="btn" type="submit" name="button">Add Restaurant</button>
+        </form>
+    </body>
+</html>
