@@ -35,10 +35,6 @@
         return $app['twig']->render('index.html.twig', array('cuisines' => Cuisine::getAll()));
     });
 
-    $app->get("/cuisines", function() use ($app) {
-        return $app['twig']->render('index.html.twig', array('cuisines' => Cuisine::getAll()));
-    });
-
     $app->get("/cuisines/{id}", function($id) use ($app) {
         $cuisine = Cuisine::find($id);
         $restaurants = Restaurant::searchByCuisine($id);

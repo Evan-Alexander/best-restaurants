@@ -7,15 +7,19 @@ body {
 .form-control {
     width: 50%;
     margin-bottom: 2%;
+    background-color: #e7fbfb;
 }
 
 .jumbotron {
     background-color: #ffd0c7;
     margin: 2% 0;
     width: 50%;
+    border: solid 5px #b4e7ea;
 }
 
-.well {}
+.well li {
+    font-size: 1.2em;
+}
 
 p {
     font-size: 1.8em;
@@ -23,4 +27,15 @@ p {
 
 a {
     font-size: 1.4em;
+}
+
+li {
+    list-style-type: none;
+}
+
+.return {
+    background-color: #e7fbfb;
+    padding: 1%;
+    border-radius: 10px;
+    margin-top: 10%;
 }
