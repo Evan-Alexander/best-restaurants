@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Restaurant Editor</title>
+    </head>
+    <body>
+        <h1>Edit your restaurant's info:</h1>
+        {% if restaurant is not empty %}
+        <h1>HERE IS SOME TEXT TO SHOW US IT IS NOT EMPTY</h1>
+        <ul>
+            <li>{{ restaurant.getRestaurantName }}</li>
+        </ul>
+        <form name="new-name" action="/display-update" method="post">
+            <input name="_method" type="hidden" value = "patch">
+            <input id="id" type="hidden" name="id" value="{{ restaurant.getId() }}">
+            <label for="new-name">Assign a new name?</label>
+            <input type="text" name="new-name" value="{{restaurant.getRestaurantName}}">
+
+
+            <label for="price-update">Change the price range:</label>
+            <select class="form-control" name="price-update">
+                <option value={{restaurant.getPrice}}> Keep current Price </option>
+                <option value="1" >SuperCheap</option>
+                <option value="2" >KindaCheap</option>
+                <option value="3" >NotsoCheap</option>
+                <option value="4" >BetterSave</option>
+                <option value="5" >ExpenseAccount</option>
+            </select>
+            <label for="cuisine_update">Change Cuisine Type?</label>
+            <select class="form-control" name="cuisine_update">
+                <option value={{restaurant.getCuisineId}}> Keep current Cuisine </option>
+                {% for cuisine in cuisines %}
+                <option value={{cuisine.getId}}>{{ cuisine.getCuisineType }}</option>
+                {% endfor %}
+            </select>
+            <button type="submit" name="button">Update</button>
+        </form>
+        {% endif %}
+
+    </body>
+</html>

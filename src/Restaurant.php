@@ -34,6 +34,11 @@
             $this->cuisine_id = $new_cuisine_id;
         }
 
+        function setPrice($new_price)
+        {
+            $this->price = $new_price;
+        }
+
         function getPrice()
         {
             return $this->price;
@@ -106,6 +111,12 @@
         {
             $GLOBALS['DB']->exec("UPDATE restaurant SET cuisine_id = '{$new_cuisine_id}' WHERE id = {$this->getId()};");
             $this->setCuisine_Id($new_cuisine_id);
+        }
+
+        function updatePrice($new_price)
+        {
+            $GLOBALS['DB']->exec("UPDATE restaurant SET price = '{$new_price}' WHERE id = {$this->getId()};");
+            $this->setPrice($new_price);
         }
 
 

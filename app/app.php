@@ -40,6 +40,22 @@
         return $app['twig']->render('cuisine.html.twig', array('cuisines' => $cuisine, 'restaurants' => $restaurants));
     });
 
+    $app->post("/restaurant", function() use ($app) {
+        $new_restaurant = new Restaurant ($_POST['restaurant_name'], $_POST['cuisine_id'], $_POST['price']);
+        $new_restaurant->save();
+        $cuisines = Cuisine::find($_POST['cuisine_id']);
+        $restaurants = Restaurant::searchByCuisine($_POST['cuisine_id']);
+
+        return $app['twig']->render('cuisine.html.twig', array('cuisines' => $cuisines, 'restaurants' => $restaurants));
+    });
+
+    $app->get("/restaurant-edit/{id}", function($id) use ($app) {
+        $edit_restaurant = Restaurant::find($id);
+        $current_price = $edit_restaurant->getPrice();
+        var_dump($edit_restaurant);
+        return $app['twig']->render('restaurant-editor.html.twig', array('restaurant' => $edit_restaurant, 'cuisines' => Cuisine::getAll()));
+    });
+
     return $app;
 
 ?>

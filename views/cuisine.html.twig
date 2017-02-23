@@ -14,6 +14,7 @@
                 <li>{{ restaurant.getRestaurantName }}</li>
                 <ul>
                     <li>{{ restaurant.getPrice }}</li>
+                    <a href="/restaurant-edit/{{restaurant.getId}}">Edit this restaurant's info</a>
                 </ul>
                 {% endfor %}
             </ul>
@@ -24,7 +25,7 @@
         <form action="/restaurant" method="post">
             <input id="cuisine_id" type="hidden" name="cuisine_id" value="{{ cuisines.getId() }}">
             <label for="restaurant_name">Restaurant Name</label>
-            <input type="text" id="restaurant_name "name="restaurant_name">
+            <input type="text" id="restaurant_name" name="restaurant_name">
 
             <label for="price">Price</label>
             <select class="form-control" name="price">
