@@ -8,6 +8,9 @@
     use Symfony\Component\Debug\Debug;
     Debug::enable();
 
+    use Symfony\Component\HttpFoundation\Request;
+    Request::enableHttpMethodParameterOverride();
+
     $app = new Silex\Application();
     $app['debug']=true;
 
@@ -21,8 +24,6 @@
         'twig.path' => __DIR__.'/../views'
     ));
 
-    use Symfony\Component\HttpFoundation\Request;
-    Request::enableHttpMethodParameterOverride();
 
     $app->get("/", function() use ($app) {
         return $app['twig']->render('index.html.twig', array('cuisines' => Cuisine::getAll()));
@@ -34,9 +35,14 @@
         return $app['twig']->render('index.html.twig', array('cuisines' => Cuisine::getAll()));
     });
 
+    $app->get("/cuisines", function() use ($app) {
+        return $app['twig']->render('index.html.twig', array('cuisines' => Cuisine::getAll()));
+    });
+
     $app->get("/cuisines/{id}", function($id) use ($app) {
         $cuisine = Cuisine::find($id);
-        $restaurants = Restaurant::find($id);
+        $restaurants = Restaurant::searchByCuisine($id);
+        var_dump($restaurants);
         return $app['twig']->render('cuisine.html.twig', array('cuisines' => $cuisine, 'restaurants' => $restaurants));
     });
 
@@ -55,9 +61,12 @@
         return $app['twig']->render('restaurant-editor.html.twig', array('restaurant' => $edit_restaurant, 'cuisines' => Cuisine::getAll()));
     });
 
-    $app->post("/display-update/{id}", function($id) use ($app) {
-        $current_restaurant = Restaurant::find($id);
+    $app->patch("/display-update", function() use ($app) {
+        $current_restaurant = Restaurant::find($_POST['id']);
         $current_restaurant->update($_POST['new-name'], $_POST['price-update'], $_POST['cuisine_update']);
+        $cuisine = Cuisine::find($_POST['cuisine_update']);
+        $restaurants = Restaurant::searchByCuisine(['cuisine_update']);
+        return $app['twig']->render('cuisine.html.twig', array('cuisines' => $cuisine, 'restaurants' => $restaurants));
     });
 
     return $app;
