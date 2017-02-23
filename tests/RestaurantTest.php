@@ -115,30 +115,20 @@
             $new_restaurant = new Restaurant($restaurant_name, $cuisine_id, $price);
             $new_restaurant->save();
             $replacement_name = "Big Whopper";
+            $replacement_price = 4;
+            $replacement_cuisine_id = 2;
+            $replacement_restaurant = new Restaurant($replacement_name, $replacement_cuisine_id, $replacement_price);
+            $replacement_restaurant->save();
 
-            $new_restaurant->update($replacement_name);
-            $result = $new_restaurant->getRestaurantName();
+            $new_restaurant->update($replacement_name, $replacement_price, $replacement_cuisine_id);
 
-            $this->assertEquals($replacement_name, $result);
+            $result = array($result_name = $new_restaurant->getRestaurantName(), $result_cuisine_id = $new_restaurant->getCuisineId(), $result_price = $new_restaurant->getPrice());
 
-        }
+            $comparison = array($comparison_name = $replacement_restaurant->getRestaurantName(), $comparison_cuisine_id = $replacement_restaurant->getCuisineId(), $comparison_price = $replacement_restaurant->getPrice());
 
-        function test_updateCuisineId()
-        {
-            $restaurant_name = "Junkytown";
-            $cuisine_id = 1;
-            $price =3;
-            $new_restaurant = new Restaurant($restaurant_name, $cuisine_id, $price);
-            $new_restaurant->save();
-            $replacement_id = 3;
-
-            $new_restaurant->updateCuisineType($replacement_id);
-            $result = $new_restaurant->getCuisineId();
-
-            $this->assertEquals($replacement_id, $result);
+            $this->assertEquals($comparison, $result);
 
         }
-
 
     }
 

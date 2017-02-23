@@ -52,8 +52,12 @@
     $app->get("/restaurant-edit/{id}", function($id) use ($app) {
         $edit_restaurant = Restaurant::find($id);
         $current_price = $edit_restaurant->getPrice();
-        var_dump($edit_restaurant);
         return $app['twig']->render('restaurant-editor.html.twig', array('restaurant' => $edit_restaurant, 'cuisines' => Cuisine::getAll()));
+    });
+
+    $app->post("/display-update/{id}", function($id) use ($app) {
+        $current_restaurant = Restaurant::find($id);
+        $current_restaurant->update($_POST['new-name'], $_POST['price-update'], $_POST['cuisine_update']);
     });
 
     return $app;
