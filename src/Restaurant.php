@@ -108,5 +108,10 @@
             $this->setPrice($new_price);
             $this->setCuisine_Id($new_cuisine_id);
         }
+
+        function deleteRestaurant()
+        {
+            $GLOBALS['DB']->exec("DELETE FROM restaurant WHERE id = {$this->getId()}");
+        }
     }
 ?>

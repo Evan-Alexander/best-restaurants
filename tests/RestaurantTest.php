@@ -127,7 +127,20 @@
             $comparison = array($comparison_name = $replacement_restaurant->getRestaurantName(), $comparison_cuisine_id = $replacement_restaurant->getCuisineId(), $comparison_price = $replacement_restaurant->getPrice());
 
             $this->assertEquals($comparison, $result);
+        }
 
+        function test_deleteRestaurant()
+        {
+            $restaurant_name = "Chuck Chinesefood";
+            $restaurant_id = 4;
+            $restaurant_price = 2;
+            $new_restaurant = new Restaurant($restaurant_name, $restaurant_id, $restaurant_price);
+            $new_restaurant->save();
+
+            $new_restaurant->deleteRestaurant();
+            $result = Restaurant::getAll();
+
+            $this->assertEquals([], $result);
         }
 
     }
