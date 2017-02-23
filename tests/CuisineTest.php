@@ -46,7 +46,6 @@
 
             // Act
             $result = Cuisine::getAll();
-            var_dump($result);
 
 
             // Assert
@@ -112,10 +111,29 @@
             $result = Restaurant::getAll();
 
             $this->assertEquals(array($new_restaurant2), $result);
+        }
 
+        function test_sanitize()
+        {
+            $cuisine_name = "'Chuck's & Bites'";
+            $test_Cuisine= new Cuisine($cuisine_name);
+            $test_Cuisine->save();
 
+            $result = $test_Cuisine->sanitize($cuisine_name);
 
+            $this->assertEquals("\'Chuck\'s &amp; Bites\'", $result);
+        }
 
+        function test_desanitize()
+
+        {
+            $cuisine_name = "\'Chuck\'s &amp; Bites\'";
+            $test_Cuisine= new Cuisine($cuisine_name);
+            $test_Cuisine->save();
+
+            $result = $test_Cuisine->desanitize($cuisine_name);
+
+            $this->assertEquals("'Chuck's & Bites'", $result);
         }
     }
 

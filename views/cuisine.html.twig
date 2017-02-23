@@ -10,7 +10,7 @@
     </head>
     <body>
         <div class="container">
-            <div class="">
+            <div class="jumbotron">
                 <h1>{{cuisines.getCuisineType}}</h1>
 
                 {% if restaurants is not empty %}
@@ -20,9 +20,9 @@
                     <div class="well">
                         <li>{{ restaurant.getRestaurantName }}</li>
                         <ul>
-                            <li>{{ restaurant.getPrice }}</li>
-                            <a href="/restaurant-edit/{{restaurant.getId}}">Edit this restaurant's info</a>
-                        </ul>    
+                            <li>Price Range: {{ restaurant.getPrice }}</li>
+                        </ul>
+                        <a href="/restaurant-edit/{{restaurant.getId}}">Edit Restaurant</a>
                     </div>
                     {% endfor %}
                 </ul>

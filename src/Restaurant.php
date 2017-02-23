@@ -113,5 +113,22 @@
         {
             $GLOBALS['DB']->exec("DELETE FROM restaurant WHERE id = {$this->getId()}");
         }
+
+        function sanitize($input)
+        {
+            $result = trim($input);
+            $result = addslashes($result);
+            $result = htmlspecialchars($result);
+            return $result;
+        }
+
+        function desanitize($input)
+        {
+            $result = stripslashes($input);
+            echo($result);
+            $result = htmlspecialchars_decode($result);
+            echo($result);
+            return $result;
+        }
     }
 ?>
