@@ -42,7 +42,6 @@
     $app->get("/cuisines/{id}", function($id) use ($app) {
         $cuisine = Cuisine::find($id);
         $restaurants = Restaurant::searchByCuisine($id);
-        var_dump($restaurants);
         return $app['twig']->render('cuisine.html.twig', array('cuisines' => $cuisine, 'restaurants' => $restaurants));
     });
 

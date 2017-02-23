@@ -1,0 +1,24 @@
+body {
+    background-color: tomato;
+    font-family: 'Quicksand', sans-serif;
+}
+
+
+.form-control {
+    width: 50%;
+    margin-bottom: 2%;
+}
+
+.jumbotron {
+    background-color: #ffd0c7;
+    margin: 2% 0;
+    width: 50%;
+}
+
+p {
+    font-size: 1.8em;
+}
+
+a {
+    font-size: 1.4em;
+}

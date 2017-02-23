@@ -1,45 +1,57 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/css?family=Quicksand:400,500,700" rel="stylesheet">
+        <link href="{{ app.request.getbaseurl }}/assets/css/styles.css" rel="stylesheet" type="text/css">
+
         <meta charset="utf-8">
         <title>List of Restaurants</title>
     </head>
     <body>
-        <h1>{{cuisines.getCuisineType}}</h1>
+        <div class="container">
+            <div class="">
+                <h1>{{cuisines.getCuisineType}}</h1>
 
-        {% if restaurants is not empty %}
-            <p>Behold a list of restaurants serving this cuisine!</p>
-            <ul>
-                {% for restaurant in restaurants %}
-                <li>{{ restaurant.getRestaurantName }}</li>
+                {% if restaurants is not empty %}
+                <p>Behold a list of restaurants serving this cuisine!</p>
                 <ul>
-                    <li>{{ restaurant.getPrice }}</li>
-                    <a href="/restaurant-edit/{{restaurant.getId}}">Edit this restaurant's info</a>
+                    {% for restaurant in restaurants %}
+                    <div class="well">
+                        <li>{{ restaurant.getRestaurantName }}</li>
+                        <ul>
+                            <li>{{ restaurant.getPrice }}</li>
+                            <a href="/restaurant-edit/{{restaurant.getId}}">Edit this restaurant's info</a>
+                        </ul>    
+                    </div>
+                    {% endfor %}
                 </ul>
-                {% endfor %}
-            </ul>
-        {% endif %}
+                {% endif %}
 
-        <h3>Add another Restaurant with this type of Cuisine!</h3>
+            </div>
 
-        <form action="/restaurant" method="post">
-            <input id="cuisine_id" type="hidden" name="cuisine_id" value="{{ cuisines.getId() }}">
-            <label for="restaurant_name">Restaurant Name</label>
-            <input type="text" id="restaurant_name" name="restaurant_name">
 
-            <label for="price">Price</label>
-            <select class="form-control" name="price">
-                <option value=null> - </option>
-                <option value="1">SuperCheap</option>
-                <option value="2">KindaCheap</option>
-                <option value="3">NotsoCheap</option>
-                <option value="4">BetterSave</option>
-                <option value="5">ExpenseAccount</option>
-            </select>
+            <h3>Add another Restaurant with this type of Cuisine!</h3>
 
-            <button class="btn" type="submit" name="button">Add Restaurant</button>
-        </form>
-        <li><a href="/cuisines">Return to a list of Cuisines</a></li>
+            <form class="form-group" action="/restaurant" method="post">
+                <input id="cuisine_id" type="hidden" name="cuisine_id" value="{{ cuisines.getId() }}">
+                <label for="restaurant_name">Restaurant Name</label>
+                <input class="form-control" type="text" id="restaurant_name" name="restaurant_name">
+
+                <label for="price">Price</label>
+                <select class="form-control" name="price">
+                    <option value=null> - </option>
+                    <option value="1">SuperCheap</option>
+                    <option value="2">KindaCheap</option>
+                    <option value="3">NotsoCheap</option>
+                    <option value="4">BetterSave</option>
+                    <option value="5">ExpenseAccount</option>
+                </select>
+
+                <button class="btn btn-info" type="submit" name="button">Add Restaurant</button>
+            </form>
+            <li><a href="/cuisines">Return to a list of Cuisines</a></li>
+        </div>
 
     </body>
 </html>

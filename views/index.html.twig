@@ -1,30 +1,40 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/css?family=Quicksand:400,500,700" rel="stylesheet">
+        <link href="{{ app.request.getbaseurl }}/assets/css/styles.css" rel="stylesheet" type="text/css">
+
         <title>Best Restaurants</title>
     </head>
     <body>
-        <h1>Welcome to Best Restaurants</h1>
+        <div class="container">
 
-        <p>Enter a Cuisine you enjoy:</p>
+            <h1>Welcome to Best Restaurants</h1>
 
-        <form action="/cuisines" method="post">
-            <label for="cuisine_name">Cuisine Name:</label>
-            <input id="cuisine_name" type="text" name="cuisine_name" value="">
+            <p>Enter a Cuisine you enjoy:</p>
 
-            <button type="submit" name="button">Add Cuisine</button>
-        </form>
+            <form action="/cuisines" method="post">
+                <label for="cuisine_name">Cuisine Name:</label>
+                <input class="form-control" id="cuisine_name" type="text" name="cuisine_name" value="">
 
-        {% if cuisines is not empty %}
-        <p>Here are your cuisines:</p>
-        <ul>
-            {% for cuisine in cuisines %}
-                <li><a href="/cuisines/{{cuisine.getId}}">{{cuisine.getCuisineType}}</a></li>
-                {% endfor %}
-        </ul>
-        {% else %}
-            <p>There are no cuisines yet!</p>
-        {% endif %}
+                <button class="btn btn-info" type="submit" name="button">Add Cuisine</button>
+            </form>
+            <div class="jumbotron">
+                {% if cuisines is not empty %}
+                <p>Here are your cuisines:</p>
+                <ul>
+                    {% for cuisine in cuisines %}
+                    <li><a href="/cuisines/{{cuisine.getId}}">{{cuisine.getCuisineType}}</a></li>
+                    {% endfor %}
+                </ul>
+                {% else %}
+                <p>There are no cuisines yet!</p>
+                {% endif %}
+
+            </div>
+
+        </div>
 
 
     </body>
