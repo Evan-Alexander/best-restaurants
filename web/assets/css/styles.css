@@ -13,8 +13,12 @@ body {
 .jumbotron {
     background-color: #ffd0c7;
     margin: 2% 0;
-    width: 50%;
+    width: 75%;
     border: solid 5px #b4e7ea;
+}
+
+.jumbotron h1 {
+    max-width: 90%;
 }
 
 .well li {
@@ -38,4 +42,9 @@ li {
     padding: 1%;
     border-radius: 10px;
     margin-top: 10%;
+}
+
+#delete {
+    margin-top: 1%;
+    margin-bottom: 1%;
 }
