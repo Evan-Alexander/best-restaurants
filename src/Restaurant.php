@@ -51,6 +51,7 @@
 
         function save()
         {
+            $this->sanitize();
             $GLOBALS['DB']->exec("INSERT INTO restaurant (restaurant_name, cuisine_id, price) VALUES ('{$this->getRestaurantName()}', {$this->getCuisineId()}, {$this->getPrice()})");
             $this->id = $GLOBALS['DB']->lastInsertId();
         }
@@ -65,6 +66,7 @@
                 $price = $restaurant['price'];
                 $id = $restaurant['id'];
                 $new_restaurant = new Restaurant($restaurant_name, $cuisine_id, $price, $id);
+                $new_restaurant->desanitize();
                 array_push($restaurants, $new_restaurant);
             }
             return $restaurants;
@@ -103,10 +105,11 @@
 
         function update($new_name, $new_price, $new_cuisine_id)
         {
-            $GLOBALS['DB']->exec("UPDATE restaurant SET restaurant_name = '{$new_name}', price = '{$new_price}', cuisine_id = '{$new_cuisine_id}' WHERE id = {$this->getId()};");
             $this->setRestaurantName($new_name);
             $this->setPrice($new_price);
             $this->setCuisine_Id($new_cuisine_id);
+            $this->sanitize();
+            $GLOBALS['DB']->exec("UPDATE restaurant SET restaurant_name = '{$this->restaurant_name}', price = '{$this->price}', cuisine_id = '{$this->cuisine_id}' WHERE id = {$this->getId()};");
         }
 
         function deleteRestaurant()
@@ -114,21 +117,14 @@
             $GLOBALS['DB']->exec("DELETE FROM restaurant WHERE id = {$this->getId()}");
         }
 
-        function sanitize($input)
+        function sanitize()
         {
-            $result = trim($input);
-            $result = addslashes($result);
-            $result = htmlspecialchars($result);
-            return $result;
+            $this->restaurant_name = htmlspecialchars(addslashes(trim($this->restaurant_name)));
         }
 
-        function desanitize($input)
+        function desanitize()
         {
-            $result = stripslashes($input);
-            echo($result);
-            $result = htmlspecialchars_decode($result);
-            echo($result);
-            return $result;
+            $this->restaurant_name = htmlspecialchars_decode(stripslashes($this->restaurant_name));
         }
     }
 ?>

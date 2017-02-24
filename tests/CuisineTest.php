@@ -117,9 +117,10 @@
         {
             $cuisine_name = "'Chuck's & Bites'";
             $test_Cuisine= new Cuisine($cuisine_name);
+            $test_Cuisine->sanitize();
             $test_Cuisine->save();
 
-            $result = $test_Cuisine->sanitize($cuisine_name);
+            $result = $test_Cuisine->getCuisineType();
 
             $this->assertEquals("\'Chuck\'s &amp; Bites\'", $result);
         }
@@ -129,9 +130,10 @@
         {
             $cuisine_name = "\'Chuck\'s &amp; Bites\'";
             $test_Cuisine= new Cuisine($cuisine_name);
+            $test_Cuisine->desanitize();
             $test_Cuisine->save();
 
-            $result = $test_Cuisine->desanitize($cuisine_name);
+            $result = $test_Cuisine->getCuisineType();
 
             $this->assertEquals("'Chuck's & Bites'", $result);
         }

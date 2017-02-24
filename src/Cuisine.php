@@ -74,21 +74,14 @@
             $GLOBALS['DB']->exec("DELETE FROM restaurant WHERE cuisine_id = {$this->getId()};");
         }
 
-        function sanitize($input)
+        function sanitize()
         {
-            $result = trim($input);
-            $result = addslashes($result);
-            $result = htmlspecialchars($result);
-            return $result;
+            $this->cuisine_type = htmlspecialchars(addslashes(trim($this->cuisine_type)));
         }
 
-        function desanitize($input)
+        function desanitize()
         {
-            $result = stripslashes($input);
-            echo($result);
-            $result = htmlspecialchars_decode($result);
-            echo($result);
-            return $result;
+            $this->cuisine_type = htmlspecialchars_decode(stripslashes($this->cuisine_type));
         }
     }
 ?>
